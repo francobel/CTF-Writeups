@@ -4,3 +4,6 @@ Author: TW1C3\
 Difficulty Level: Beginner
 
 ## Recon
+1. **Find the targets IP Address**\
+Command: netdiscover -r 10.10.10.10/24\
+[netdiscover](/images/1.png)
