@@ -81,7 +81,7 @@ I wrote a quick php script that will change the user I'm logged in as from alice
 ![su](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/17.png "su")\
 \
 And executed it\
-Command: sudo php exploit.php\
+**Command: sudo php exploit.php**\
 ![change](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/18.png "root")\
 Now we are logged in as **root**.\
 \
