@@ -73,7 +73,7 @@ After getting a user shell, the first thing I do in my enumartion process is che
 **-l**: lists the commands the user has root priviledges with.\
 ![sudo](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/16.png "sudo")\
 The second to last line tells us the user has root access to the "php" command with no need for a password.\
-Now we have enough info to get a root shell on the target's machine.\
+Now we have enough info to get a root shell on the target's machine.
 
 3. **Exploitation**\
 Since I know alice has root privs with php, any php code I create can be executed with root priviledges.\
@@ -87,6 +87,5 @@ Now we are logged in as **root**.\
 \
 The final step is to navigate to the root directory and read the final flag.\
 **Command: cat flag2.txt > $(tty)**\
+![x](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/19.png "flag2")\
 I had to redirect cat's output to tty because it wasn't showing up without it. I'm assuming it was to add a level of difficulty.\
-![x](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/19.png "flag2")
-
