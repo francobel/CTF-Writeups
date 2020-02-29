@@ -1,7 +1,7 @@
 # Me and My Girlfriend: 1
 Date release: 13 Dec 2019\
 Author: TW1C3\
-Difficulty Level: Beginner
+Difficulty Level: Beginner\
 
 ## Recon
 1. **Find the targets IP Address**\
@@ -75,7 +75,7 @@ After getting a user shell, the first thing I do in my enumartion process is che
 The second to last line tells us the user has root access to the "php" command with no need for a password.\
 Now we have enough info to get a root shell on the target's machine.
 
-3. **Exploitation**\
+3. **Exploitation / Priviledge Escalation**\
 Since I know alice has root privs with php, any php code I create can be executed with root priviledges.\
 I wrote a quick php script that will change the user I'm logged in as from alice to root.
 ![su](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/17.png "su")\
@@ -88,4 +88,4 @@ Now we are logged in as **root**.\
 The final step is to navigate to the root directory and read the final flag.\
 **Command: cat flag2.txt > $(tty)**\
 ![x](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/19.png "flag2")\
-I had to redirect cat's output to tty because it wasn't showing up without it. I'm assuming it was to add a level of difficulty.\
+I had to redirect cat's output to tty because it wasn't showing up without it. I'm assuming it was to add a level of difficulty.
