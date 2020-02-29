@@ -5,13 +5,13 @@ Difficulty Level: Beginner
 
 ## Recon
 1. **Find the targets IP Address**\
-Command: netdiscover -r 10.10.10.10/24\
+**Command: netdiscover -r 10.10.10.10/24**\
 ![netdiscover](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/1.png "netdiscover")
 
 2. **Scan the targets ports**\
-Command: nmap -sC -sV 10.10.10.2\
--sC: Performs a script scan using the default set of scripts on each open port found.\
--sV: Enumerates the versions of the open ports.\
+**Command: nmap -sC -sV 10.10.10.2**\
+**-sC**: Performs a script scan using the default set of scripts on each open port found.\
+**-sV**: Enumerates the versions of the open ports.\
 ![nmap](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/2.png "nmap")\
 Ports 22(SSH) and 80(HTTP) are open.
 
@@ -53,7 +53,40 @@ I sent the request to burp's repeater to speed up the process of enumerating all
 ![bur](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/13.png "burp")\
 On the response's HTML you can see the values for the username and password.\
 \
-After going through users 1 - 12 these are the credentials that were found.
-![creds](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/14.png "creds")\
+After going through users 1 - 12 these are the credentials that were found.\
+![creds](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/14.png "creds")
 
+## Exploitation
+1. **Getting user shell**\
+Since port 22(SSH) was open, I tried all of the credentials to log into the target's machine through SSH.\
+Only the account with the credentials **alice:4lic3** allowed us to log in.\
+**Command: ssh alice@10.10.10.2**\
+![ssh](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/15.png "ssh")\
+Now we have a user shell on the target!\
+\
+After listing the files in alice's home directory I navigate to her "my_secret" folder and get the first flag.\
+![flag1](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/20.png "flag1")
+
+2. **Enumerating Target Machine**\
+After getting a user shell, the first thing I do in my enumartion process is check the root priviledges of the user I'm logged in as with the following command.\
+**Command: sudo -l**\
+**-l**: lists the commands the user has root priviledges with.\
+![sudo](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/16.png "sudo")\
+The second to last line tells us the user has root access to the "php" command with no need for a password.\
+Now we have enough info to get a root shell on the target's machine.\
+
+3. **Exploitation**\
+Since I know alice has root privs with php, any php code I create can be executed with root priviledges.\
+I wrote a quick php script that will change the user I'm logged in as from alice to root.
+![su](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/17.png "su")\
+\
+And executed it\
+Command: sudo php exploit.php\
+![change](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/18.png "root")\
+Now we are logged in as **root**.\
+\
+The final step is to navigate to the root directory and read the final flag.\
+**Command: cat flag2.txt > $(tty)**\
+I had to redirect cat's output to tty because it wasn't showing up without it. I'm assuming it was to add a level of difficulty.\
+![x](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Me%20and%20My%20Girlfriend:%201/Images/19.png "flag2")
 
