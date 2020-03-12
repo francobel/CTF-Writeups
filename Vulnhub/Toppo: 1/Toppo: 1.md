@@ -54,7 +54,7 @@ Command: **python2.7 -c 'import pty; pty.spawn("/bin/sh")'**
 ![root](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Toppo:%201/Images/11.png "root")\
 \
 Now all that is left is to go to the root folder and capture the flag.\
-![flag](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Toppo:%201/Images/10.png "flag")\
+![flag](https://github.com/francobel/CTF-Writeups/blob/master/Vulnhub/Toppo:%201/Images/10.png "flag")
 
 
 
